@@ -9,6 +9,8 @@ const mockUser = {
   email: 'test@example.com'
 };
 
+const agent = request.agent(app);
+
 describe('backend-express-template routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -18,15 +20,13 @@ describe('backend-express-template routes', () => {
     pool.end();
   });
 
-  it('#POST /user should create a new user', async () => {
-    const response = await request(app).post('/api/v1/user').send(mockUser);
-    const { username, email } = mockUser;
+  it('#POST /user should create and sign in a new user', async () => {
+    const response = await agent.post('/api/v1/user').send(mockUser);
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      id: expect.any(String),
-      username,
-      email,
+      message: 'successfully signed in',
+      success: true,
     });
   });
 

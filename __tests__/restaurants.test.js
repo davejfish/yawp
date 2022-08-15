@@ -21,5 +21,20 @@ describe('backend-express-template routes', () => {
       name: expect.any(String),
     });
   });
+
+  it('#GET /restaurants/:id should return a restaurant with reviews', async () => {
+    const response = await request(app).get('/api/v1/restaurants/1');
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      id: '1',
+      name: 'Imagine',
+      reviews: [
+        'best miso ramen of all time',
+        '15/10 best ever',
+        'karaage so juicy',
+      ]
+    });
+  });
   
 });

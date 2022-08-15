@@ -20,6 +20,14 @@ describe('backend-express-template routes', () => {
     pool.end();
   });
 
-  
+  it('#GET /restaurants should return a list of restaurants', async () => {
+    const response = await request(app).get('/api/v1/restaurants');
+
+    expect(response.status).toBe(200);
+    expect(response.body[0]).toEqual({
+      id: expect.any(String),
+      name: expect.any(String),
+    });
+  });
   
 });

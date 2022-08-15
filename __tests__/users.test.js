@@ -44,4 +44,22 @@ describe('backend-express-template routes', () => {
     });
   });
 
+  it('#GET /users should return a list of all users if admin', async () => {
+    await agent.post('/api/v1/user').send({
+      username: 'fake',
+      email: 'admin',
+      password: 'fakehash'
+    });
+    const response = await agent.get('/api/v1/user/users');
+
+    expect(response.status).toBe(200);
+    expect.any(response.body.length).toBe(4);
+    expect(response.body[0]).toEqual({
+      id: expect.any(String),
+      username: expect.any(String),
+      email: expect.any(String),
+      password: expect.any(String),
+    });
+  });
+  
 });

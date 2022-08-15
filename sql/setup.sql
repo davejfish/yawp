@@ -10,3 +10,9 @@ CREATE TABLE users (
   email TEXT UNIQUE
 );
 
+INSERT INTO users
+(username, password_hash, email)
+VALUES
+('yawper', 'fakehash', 'yawper@yawp.com'),
+('critic', 'fakehash', 'critic@yawp.com'),
+('kev', 'fakehash', 'stuff@yawp.com');

@@ -30,4 +30,18 @@ describe('backend-express-template routes', () => {
     });
   });
 
+  it('#POST /sign-in should sign in an existing user', async () => {
+    const response = await agent.post('/api/v1/user/sign-in').send({
+      username: 'yawper',
+      email: 'yawper@yawp.com',
+      password: 'fakehash',
+    });
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      message: 'successfully signed in',
+      success: true,
+    });
+  });
+
 });

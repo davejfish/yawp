@@ -2,6 +2,13 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const { agent } = require('supertest');
+
+const mockUser = {
+  username: 'faker',
+  email: 'fake@fake.com',
+  password: 'fakehash',
+};
 
 describe('backend-express-template routes', () => {
   beforeEach(() => {
@@ -35,6 +42,18 @@ describe('backend-express-template routes', () => {
         'karaage so juicy',
       ]
     });
+  });
+
+  it('#POST /restaurants/review should add a review for a restaurant', async () => {
+    const user = await agent.post('/api/v1/user').send(mockUser);
+
+    const response = await agent.post('/api/v1/restaurants/review').send({
+      rest_id: 2,
+      user_id: user.id,
+      review: 'testing a review'
+    });
+
+    expect(response.status).toBe(200);
   });
   
 });

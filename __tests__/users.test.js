@@ -67,5 +67,26 @@ describe('backend-express-template routes', () => {
       email: expect.any(String),
     });
   });
+
+  it('#GET /profile/:id gets a user with all reviews', async () => {
+    await agent.post('/api/v1/user').send({
+      username: 'fake',
+      email: 'admin',
+      password: 'fakehash'
+    });
+    const response = await agent.get('/api/v1/user/users/profile/1');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      id: expect.any(String),
+      username: 'yawper',
+      email: 'yawper@yawp.com',
+      reviews: [
+        'best miso ramen of all time',
+        '15/10 best ever',
+        'KARAAGE CURRY!!!!',
+        'new york style pizza in Japan. 8/10.',
+      ],
+    });
+  });
   
 });

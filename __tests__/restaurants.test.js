@@ -90,4 +90,14 @@ describe('backend-express-template routes', () => {
     });
 
   });
+
+  it('#GET /search/:param should return all matching restaurants', async () => {
+    const response = await request(app).get('/api/v1/restaurants/search/coco');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      id: expect.any(String),
+      name: 'CoCoIchibanya',
+    });
+  });
+
 });

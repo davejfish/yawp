@@ -64,5 +64,16 @@ describe('backend-express-template routes', () => {
 
     expect(response.status).toBe(200);
   });
-  
+
+  it('#DELETE /restaurants/:id should delete a review if user id matches review id', async () => {
+    await agent.post('/api/v1/user/sign-in').send({
+      username: 'yawper',
+      email: 'yawper@yawp.com',
+      password: 'fakehash'
+    });
+
+    const response = await agent.delete('/api/v1/review/1');
+    expect(response.status).toBe(200);
+
+  });
 });

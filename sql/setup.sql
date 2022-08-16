@@ -37,7 +37,7 @@ INSERT INTO users
 (username, password_hash, email)
 VALUES
 ('yawper', '$2b$10$GOi9xgKDsVwO8JXRr6jBlOkOm4DaZ3IKopWy6DBJ.BuAX79H1f6Yy', 'yawper@yawp.com'),
-('critic', 'fakehash', 'critic@yawp.com'),
+('critic', '$2b$10$GOi9xgKDsVwO8JXRr6jBlOkOm4DaZ3IKopWy6DBJ.BuAX79H1f6Yy', 'critic@yawp.com'),
 ('kev', 'fakehash', 'stuff@yawp.com');
 
 INSERT INTO rest_reviews

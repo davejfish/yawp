@@ -72,8 +72,22 @@ describe('backend-express-template routes', () => {
       password: 'fakehash'
     });
 
-    const response = await agent.delete('/api/v1/review/1');
+    const response = await agent.delete('/api/v1/restaurants/review/1');
     expect(response.status).toBe(200);
+  });
+
+  it('#DELETE /restaurants/:id should return error if not your post', async () => {
+    await agent.post('/api/v1/user/sign-in').send({
+      username: 'critic',
+      password: 'fakehash',
+      email: 'critic@yawp.com',
+    });
+
+    const response = await agent.delete('/api/v1/restaurants/review/1');
+    expect(response.body).toEqual({
+      message: 'You do not have permission to delete this review',
+      status: 401,
+    });
 
   });
 });

@@ -46,6 +46,14 @@ describe('backend-express-template routes', () => {
   });
 
   it('#POST /restaurants/review should add a review for a restaurant', async () => {
+    const failure = await request(app).post('/api/v1/restaurants/review').send({
+      rest_id: 2,
+      user_id: 4,
+      review: 'testing a review'
+    });
+
+    expect(failure.status).toBe(401);
+
     const user = await agent.post('/api/v1/user').send(mockUser);
 
     const response = await agent.post('/api/v1/restaurants/review').send({

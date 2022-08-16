@@ -25,6 +25,9 @@ describe('backend-express-template routes', () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
+      username: 'fake',
+      id: '4',
+      email: 'test@example.com',
       message: 'successfully signed in',
       success: true,
     });

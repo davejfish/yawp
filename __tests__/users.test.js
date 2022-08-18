@@ -21,7 +21,7 @@ describe('backend-express-template routes', () => {
   });
 
   it('#POST /user should create and sign in a new user', async () => {
-    const response = await agent.post('/api/v1/user').send(mockUser);
+    const response = await agent.post('/api/v1/users').send(mockUser);
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
@@ -34,7 +34,7 @@ describe('backend-express-template routes', () => {
   });
 
   it('#POST /sign-in should sign in an existing user', async () => {
-    const response = await agent.post('/api/v1/user/sign-in').send({
+    const response = await agent.post('/api/v1/users/sessions').send({
       username: 'yawper',
       email: 'yawper@yawp.com',
       password: 'fakehash',
@@ -49,15 +49,15 @@ describe('backend-express-template routes', () => {
 
   it('#GET /users should return a list of all users if admin', async () => {
 
-    const failure = await request(app).get('/api/v1/user/users');
+    const failure = await request(app).get('/api/v1/users');
     expect(failure.status).toBe(401);
 
-    await agent.post('/api/v1/user').send({
+    await agent.post('/api/v1/users').send({
       username: 'fake',
       email: 'admin',
       password: 'fakehash'
     });
-    const response = await agent.get('/api/v1/user/users');
+    const response = await agent.get('/api/v1/users');
 
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(4);
@@ -69,12 +69,12 @@ describe('backend-express-template routes', () => {
   });
 
   it('#GET /profile/:id gets a user with all reviews', async () => {
-    await agent.post('/api/v1/user').send({
+    await agent.post('/api/v1/users').send({
       username: 'fake',
       email: 'admin',
       password: 'fakehash'
     });
-    const response = await agent.get('/api/v1/user/users/profile/1');
+    const response = await agent.get('/api/v1/users/profile/1');
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
       id: expect.any(String),

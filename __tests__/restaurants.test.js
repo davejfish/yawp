@@ -30,8 +30,8 @@ describe('backend-express-template routes', () => {
     });
   });
 
-  it('#GET /restaurants/:id/reviews should return a restaurant with reviews', async () => {
-    const response = await request(app).get('/api/v1/restaurants/1/reviews');
+  it('#GET /restaurants/:restid should return a restaurant with reviews', async () => {
+    const response = await request(app).get('/api/v1/restaurants/1');
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
@@ -45,8 +45,8 @@ describe('backend-express-template routes', () => {
     });
   });
 
-  it('#POST /restaurants/review should add a review for a restaurant', async () => {
-    const failure = await request(app).post('/api/v1/restaurants/review').send({
+  it('#POST /restaurants/:restid/reviews should add a review for a restaurant', async () => {
+    const failure = await request(app).post('/api/v1/restaurants/2/reviews').send({
       rest_id: 2,
       user_id: 4,
       stars: 1,
@@ -55,9 +55,9 @@ describe('backend-express-template routes', () => {
 
     expect(failure.status).toBe(401);
 
-    const user = await agent.post('/api/v1/user').send(mockUser);
+    const user = await agent.post('/api/v1/users').send(mockUser);
 
-    const response = await agent.post('/api/v1/restaurants/review').send({
+    const response = await agent.post('/api/v1/restaurants/2/reviews').send({
       rest_id: 2,
       user_id: user.body.id,
       stars: 1,
@@ -68,7 +68,7 @@ describe('backend-express-template routes', () => {
   });
 
   it('#DELETE /restaurants/:id should delete a review if user id matches review id', async () => {
-    await agent.post('/api/v1/user/sign-in').send({
+    await agent.post('/api/v1/users/sessions').send({
       username: 'yawper',
       email: 'yawper@yawp.com',
       password: 'fakehash'
@@ -79,7 +79,7 @@ describe('backend-express-template routes', () => {
   });
 
   it('#DELETE /restaurants/:id should return error if not your post', async () => {
-    await agent.post('/api/v1/user/sign-in').send({
+    await agent.post('/api/v1/users/sessions').send({
       username: 'critic',
       password: 'fakehash',
       email: 'critic@yawp.com',

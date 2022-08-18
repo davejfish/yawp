@@ -81,10 +81,10 @@ describe('backend-express-template routes', () => {
       username: 'yawper',
       email: 'yawper@yawp.com',
       reviews: [
-        'best miso ramen of all time',
-        '15/10 best ever',
-        'KARAAGE CURRY!!!!',
-        'new york style pizza in Japan. 8/10.',
+        { stars: 5, review: 'best miso ramen of all time' },
+        { stars: 5, review: '15/10 best ever' },
+        { stars: 5, review: 'KARAAGE CURRY!!!!' },
+        { stars: 3, review: 'new york style pizza in Japan. 8/10.' },
       ],
     });
   });

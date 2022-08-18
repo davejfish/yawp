@@ -38,9 +38,9 @@ describe('backend-express-template routes', () => {
       id: '1',
       name: 'Imagine',
       reviews: [
-        'best miso ramen of all time',
-        '15/10 best ever',
-        'karaage so juicy',
+        { stars: 5, review: 'best miso ramen of all time' },
+        { stars: 5, review: '15/10 best ever' },
+        { stars: 5, review: 'karaage so juicy' },
       ]
     });
   });
@@ -49,6 +49,7 @@ describe('backend-express-template routes', () => {
     const failure = await request(app).post('/api/v1/restaurants/review').send({
       rest_id: 2,
       user_id: 4,
+      stars: 1,
       review: 'testing a review'
     });
 
@@ -59,6 +60,7 @@ describe('backend-express-template routes', () => {
     const response = await agent.post('/api/v1/restaurants/review').send({
       rest_id: 2,
       user_id: user.body.id,
+      stars: 1,
       review: 'testing a review'
     });
 

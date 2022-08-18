@@ -21,6 +21,7 @@ CREATE TABLE rest_reviews (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   rest_id BIGINT NOT NULL,
   user_id BIGINT NOT NULL,
+  stars INT NOT NULL,
   review varchar(255) NOT NULL,
   FOREIGN KEY (rest_id) REFERENCES restaurants(id),
   FOREIGN KEY (user_id) REFERENCES users(id)
@@ -41,12 +42,12 @@ VALUES
 ('kev', 'fakehash', 'stuff@yawp.com');
 
 INSERT INTO rest_reviews
-(rest_id, user_id, review)
+(rest_id, user_id, stars, review)
 VALUES
-('1', '1', 'best miso ramen of all time'),
-('1', '1', '15/10 best ever'),
-('1', '3', 'karaage so juicy'),
-('2', '2', 'COCOICHI LETS GO'),
-('2', '1', 'KARAAGE CURRY!!!!'),
-('2', '3', 'veggie curry changed my life'),
-('3', '1', 'new york style pizza in Japan. 8/10.');
+('1', '1', '5', 'best miso ramen of all time'),
+('1', '1', '5', '15/10 best ever'),
+('1', '3', '5', 'karaage so juicy'),
+('2', '2', '5', 'COCOICHI LETS GO'),
+('2', '1', '5', 'KARAAGE CURRY!!!!'),
+('2', '3', '4', 'veggie curry changed my life'),
+('3', '1', '3', 'new york style pizza in Japan. 8/10.');

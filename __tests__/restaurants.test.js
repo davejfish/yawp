@@ -47,8 +47,6 @@ describe('backend-express-template routes', () => {
 
   it('#POST /restaurants/:restid/reviews should add a review for a restaurant', async () => {
     const failure = await request(app).post('/api/v1/restaurants/2/reviews').send({
-      rest_id: 2,
-      user_id: 4,
       stars: 1,
       review: 'testing a review'
     });

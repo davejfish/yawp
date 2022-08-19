@@ -48,7 +48,7 @@ describe('backend-express-template routes', () => {
   it('#POST /restaurants/:restid/reviews should add a review for a restaurant', async () => {
     const failure = await request(app).post('/api/v1/restaurants/2/reviews').send({
       stars: 1,
-      review: 'testing a review'
+      detail: 'testing a review'
     });
 
     expect(failure.status).toBe(401);
@@ -59,7 +59,7 @@ describe('backend-express-template routes', () => {
       rest_id: 2,
       user_id: user.body.id,
       stars: 1,
-      review: 'testing a review'
+      detail: 'testing a review'
     });
 
     expect(response.status).toBe(200);

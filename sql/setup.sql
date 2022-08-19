@@ -22,7 +22,7 @@ CREATE TABLE rest_reviews (
   rest_id BIGINT NOT NULL,
   user_id BIGINT NOT NULL,
   stars INT NOT NULL,
-  review varchar(255) NOT NULL,
+  detail varchar(255) NOT NULL,
   FOREIGN KEY (rest_id) REFERENCES restaurants(id),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
@@ -42,7 +42,7 @@ VALUES
 ('kev', 'fakehash', 'stuff@yawp.com');
 
 INSERT INTO rest_reviews
-(rest_id, user_id, stars, review)
+(rest_id, user_id, stars, detail)
 VALUES
 ('1', '1', '5', 'best miso ramen of all time'),
 ('1', '1', '5', '15/10 best ever'),
